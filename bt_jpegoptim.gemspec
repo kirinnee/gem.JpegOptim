@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
 	spec.email = ["kirinnee@gmail.com"]
 
 	spec.summary = %q{Binary Transformer plugin for jpeg optim. Requires jpeg optim to be available via the PATH variable globally}
-	spec.homepage = "var~git~"
+	spec.homepage = "https://gitlab.com/ruby-gem/jpegoptim"
 	spec.license = "MIT"
 	
 	# Specify which files should be added to the gem when it is released.
