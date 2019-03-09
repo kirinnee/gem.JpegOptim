@@ -1,6 +1,12 @@
 # Binary Transformer for JpegOptim
 
-Binary Transformer plugin for jpeg optim. Requires jpeg optim to be available via the PATH variable globally
+Binary Transformer plugin for jpeg optim. 
+
+Requires JpegOptim to be available via the PATH variable globally
+
+To use it, please also install gem [Binary Transformer](https://gitlab.com/ruby-gem/binary-transformer), and 
+see [usage](#Usage).
+
 
 ## Installation
 
@@ -18,7 +24,46 @@ Or install it yourself as:
 
     $ gem install bt_jpegoptim
 
-## Usage
+## Dependency
+This depends on [JpegOptim](https://github.com/tjko/jpegoptim), so please ensure its available via
+global PATH. 
+
+JpegOptim has to be at least version 1.4.4
+
+To Check JpegOptim version:
+```bash
+$ jpegoptim --help
+```
+
+## Getting Started
+Install and require binary transform, and create a JpegOptim
+instance. The constructor can take in the following fields
+
+|Field|Description|
+|---|---|
+| strip_all: | Strip all metadata from the jpeg image. Default: true |
+| progressive: | Make the jpeg progressive. Default: true |
+| quality: | The maximum quality to keep. Default: 75|
+
+```ruby
+require "binary_transformer"
+require "bt_jpegoptim"
+
+# Read image as binary
+image = IO.binread "image.jpg"
+
+# Use binary_transformer module to allow stream-like piping
+image.extend StreamLike
+
+# Create a pngquant instance with the follow settings. Settings not chosen will be set default
+jpegoptim = BT::JpegOptim.new(quality: 50) 
+
+# Pipe it through the transformer instance
+compressed = image > jpegoptim
+
+# Write it out
+IO.binwrite compressed, "small.jpg"
+```
 
 ## Development
 
